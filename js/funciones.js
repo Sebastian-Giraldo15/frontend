@@ -79,7 +79,7 @@ const registrarUsuario = () => {
             .then(json => {
                 alert(json.msg) //Imprimir el mensaje de la transacción
                 setTimeout(() => {
-                    window.location.href='listarUsuarios.html';
+                    window.location.href='index.html';
                 }, 1000);
             })
     }
@@ -135,7 +135,7 @@ const actualizarUsuario = () => {
                 });
 
                 setTimeout(() => {
-                    window.location.href='listarUsuarios.html';
+                    window.location.href='index.html';
                 }, 1000);
             })
     }
