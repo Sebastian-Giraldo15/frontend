@@ -46,17 +46,17 @@ const registrarUsuario = () => {
         document.getElementById('nombreHelp').innerHTML = 'Dato requerido'
 
     }
-    else if (tipoDoc.length == "Seleccionar") {
+    else if (tipoDoc.length == 0) {
         document.getElementById('tipoDocHelp').innerHTML = 'Dato requerido'
     }
     else if (numDoc == 0) {
         document.getElementById('numDocHelp').innerHTML = 'Dato requerido'
     }
-    else if (estado == "") {
+    else if (estado == 0) {
         document.getElementById('estadoHelp').innerHTML = 'Dato requerido'
     }
     else if (FechaReg.length == 0) {
-        document.getElementById('estadoHelp').innerHTML = 'Dato requerido'
+        document.getElementById('FechaRegHelp').innerHTML = 'Dato requerido'
     }
     else {
         let usuario = {
@@ -105,7 +105,7 @@ const actualizarUsuario = () => {
     else if (estado == "") {
         document.getElementById('estadoHelp').innerHTML = 'Dato requerido'
     }
-    else if (FechaReg.length == 0) {
+    else if (FechaReg.length == "") {
         document.getElementById('estadoHelp').innerHTML = 'Dato requerido'
     }
     else {
