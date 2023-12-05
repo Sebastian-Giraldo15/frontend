@@ -102,11 +102,11 @@ const actualizarUsuario = () => {
     else if (numDoc == 0) {
         document.getElementById('numDocHelp').innerHTML = 'Dato requerido'
     }
-    else if (estado == "") {
+    else if (estado == 0) {
         document.getElementById('estadoHelp').innerHTML = 'Dato requerido'
     }
-    else if (FechaReg.length == "") {
-        document.getElementById('estadoHelp').innerHTML = 'Dato requerido'
+    else if (FechaReg.length == 0) {
+        document.getElementById('FechaRegHelp').innerHTML = 'Dato requerido'
     }
     else {
         let usuario = {
