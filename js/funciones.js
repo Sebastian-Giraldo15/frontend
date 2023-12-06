@@ -31,124 +31,12 @@ const listarUsuarios = async () => {
                     `<td><button type="button" class="btn btn-danger" onclick=" confirmarEliminar('${usuario.nombre_profesional}')">Eliminar</button></td>` +
                     `<td><button onclick="redireccionarEditar('${usuario.nombre_profesional}', '${usuario.tipo_documento}', '${usuario.numero_documento}', '${usuario.estado_voluntario}', '${usuario.fecha_registro}', '${usuario.preciodolar.toFixed(2)}')">Editar</button></td>` +
                     `</tr>`;
-                // contenido = contenido + `<tr>` +
-                //     `<td>` + usuario.nombre_profesional + `</td>` +
-                //     `<td>` + usuario.tipo_documento + `</td>` +
-                //     `<td>` + usuario.numero_documento + `</td>` +
-                //     `<td>` + usuario.estado_voluntario + `</td>` +
-                //     `<td>` + usuario.fecha_registro + `</td>` +
-                //     `<td>` + usuario.preciodolar + `</td>` +
-                //     `<td><button type="button" class="btn btn-danger" onclick=" confirmarEliminar('${usuario.nombre_profesional}')">Eliminar</button></td>` +
-                //     `<td><button onclick="redireccionarEditar('${usuario.nombre_profesional}', '${usuario.tipo_documento}', '${usuario.numero_documento}', '${usuario.estado_voluntario}', '${usuario.fecha_registro}', '${usuario.preciodolar}')">Editar</button></td>` +
-                //     `</tr>`
+                
             })
             objectId.innerHTML = contenido
         })
 
 }
-
-// const registrarUsuario = () => {
-//     const nombre = document.getElementById('nombre').value
-//     const tipoDoc = document.getElementById('tipoDoc').value
-//     const numDoc = document.getElementById('numDoc').value
-//     const estado = document.getElementById('estado').value
-//     const FechaReg = document.getElementById('FechaReg').value
-//     const preciodolar = document.getElementById('preciodolar').value
-
-//     if (nombre.length == 0) {
-//         document.getElementById('nombreHelp').innerHTML = 'Dato requerido'
-
-//     }
-//     else if (tipoDoc.length == 0) {
-//         document.getElementById('tipoDocHelp').innerHTML = 'Dato requerido'
-//     }
-//     else if (numDoc.length == 0) {
-//         document.getElementById('numDocHelp').innerHTML = 'Dato requerido';
-//     }
-//     else if (estado == 0) {
-//         document.getElementById('estadoHelp').innerHTML = 'Dato requerido'
-//     }
-//     else if (FechaReg.length == 0) {
-//         document.getElementById('FechaRegHelp').innerHTML = 'Dato requerido'
-//     }
-//     else if (preciodolar.length == 0) {
-//         document.getElementById('preciodolarHelp').innerHTML = 'Dato requerido'
-//     }
-//     else {
-//         let usuario = {
-//             nombre_profesional: nombre,
-//             tipo_documento: tipoDoc,
-//             numero_documento: numDoc,
-//             estado_voluntario: (estado.toLowerCase() === 'true'),
-//             fecha_registro: FechaReg,
-//             preciodolar: parseFloat(preciodolar)
-//         }
-
-//         //Fecth permite reaizar peticiones http a una url
-//         fetch(url, {
-//             method: 'POST',
-//             mode: 'cors',
-//             body: JSON.stringify(usuario),//Convertir el objeto a JSON
-//             headers: { "Content-type": "application/json; charset=UTF-8" }
-//         })
-
-//             .then((res) => res.json())//Obtener respuesta de la petición
-//             .then(json => {
-//                 alert(json.msg) //Imprimir el mensaje de la transacción
-//                 setTimeout(() => {
-//                     window.location.href = 'index.html';
-//                 }, 1000);
-//             })
-//     }
-// }
-
-// const registrarUsuario = async () => {
-//     const nombre = document.getElementById('nombre').value;
-//     const tipoDoc = document.getElementById('tipoDoc').value;
-//     const numDoc = document.getElementById('numDoc').value;
-//     const estado = document.getElementById('estado').value;
-//     const FechaReg = document.getElementById('FechaReg').value;
-
-//     try {
-//         const response = await fetch('https://www.datos.gov.co/resource/mcec-87by.json');
-//         const data = await response.json();
-//         const preciodolar = parseFloat(data[0].valor);
-
-//         let usuario = {
-//             nombre_profesional: nombre,
-//             tipo_documento: tipoDoc,
-//             numero_documento: numDoc,
-//             estado_voluntario: (estado.toLowerCase() === 'true'),
-//             fecha_registro: FechaReg,
-//             preciodolar: preciodolar
-//         };
-
-
-//         const registroResponse = await fetch(url, {
-//             method: 'POST',
-//             mode: 'cors',
-//             body: JSON.stringify(usuario),
-//             headers: { "Content-type": "application/json; charset=UTF-8" }
-//         });
-
-//         if (!registroResponse.ok) {
-//             throw new Error(`Error al registrar el profesional. Código de respuesta: ${registroResponse.status}`);
-//         }
-
-//         const json = await registroResponse.json();
-//         alert(json.msg);
-//         setTimeout(() => {
-//             window.location.href = 'index.html';
-//         }, 1000);
-//     } catch (error) {
-//         console.error('Error al registrar el profesional:', error.message);
-//         alert('Error al registrar el profesional. Por favor, inténtalo de nuevo más tarde.');
-//     }
-// };
-
-// Nueva función para obtener el precio del dólar
-
-
 
 const obtenerPrecioDolar = async () => {
     try {
@@ -157,7 +45,7 @@ const obtenerPrecioDolar = async () => {
             throw new Error(`Error al obtener el precio del dólar. Código de respuesta: ${response.status}`);
         }
         const data = await response.json();
-        // Supongamos que la API devuelve un array y que el precio del dólar está en la primera posición
+        
         const preciodolar = parseFloat(data[0].valor);
         return preciodolar;
     } catch (error) {
@@ -166,24 +54,20 @@ const obtenerPrecioDolar = async () => {
     }
 };
 
-// Nueva función para llenar el campo de precio del dólar en el formulario
 const llenarPrecioDolarEnFormulario = async () => {
     try {
         const preciodolar = await obtenerPrecioDolar();
-        // Asignar el valor del dólar al campo de precio en el formulario
         document.getElementById('preciodolar').value = preciodolar;
     } catch (error) {
-        // Manejar el error si es necesario
+        
         console.error('Error al llenar el campo de precio del dólar en el formulario:', error.message);
     }
 };
 
 const registrarUsuario = async () => {
     try {
-        // Llenar el campo de precio del dólar antes de abrir el formulario
         await llenarPrecioDolarEnFormulario();
 
-        // Obtener otros datos del formulario
         const nombre = document.getElementById('nombre').value;
         const tipoDoc = document.getElementById('tipoDoc').value;
         const numDoc = document.getElementById('numDoc').value;
@@ -236,14 +120,8 @@ const registrarUsuario = async () => {
                     }, 1000);
                 })
         }
-        // Validar y procesar los datos como lo hacías anteriormente
-        // ...
-
-        // Continuar con el resto de tu código para registrar al usuario
-        // ...
 
     } catch (error) {
-        // Manejar errores si es necesario
         console.error('Error al registrar el profesional:', error.message);
         alert('Error al registrar el profesional. Por favor, inténtalo de nuevo más tarde.');
     }
@@ -317,17 +195,7 @@ const redireccionarEditar = (nombre_profesional, tipo_documento, numero_document
 }
 
 
-// const editarUsuario = () => {
-//     //Obtener datos de la URL
-//     var urlParams = new URLSearchParams(window.location.search);
-//     //Asignar valores a cajas de texto
-//     document.getElementById('nombre').value = urlParams.get('nombre_profesional');
-//     document.getElementById('tipoDoc').value = urlParams.get('tipo_documento');
-//     document.getElementById('numDoc').value = urlParams.get('numero_documento');
-//     document.getElementById('estado').value = urlParams.get('estado');
-//     document.getElementById('FechaReg').value = urlParams.get('fecha_registro');
-//     document.getElementById('preciodolar').value = urlParams.get('preciodolar')
-// }
+
 const editarUsuario = async () => {
     // Obtener datos de la URL
     var urlParams = new URLSearchParams(window.location.search);
@@ -345,21 +213,14 @@ const editarUsuario = async () => {
             throw new Error(`Error al obtener el precio del dólar. Código de respuesta: ${response.status}`);
         }
         const data = await response.json();
-        // Supongamos que la API devuelve un array y que el precio del dólar está en la primera posición
         const preciodolar = parseFloat(data[0].valor);
-
-        // Asignar el valor del dólar al campo de precio en el formulario
         document.getElementById('preciodolar').value = preciodolar;
-
-        // Asignar el valor del dólar a una variable global o almacenarlo donde sea necesario
 
     } catch (error) {
         console.error('Error al obtener el precio del dólar:', error.message);
-        // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario.
         alert('Error al obtener el precio del dólar. Por favor, inténtalo de nuevo más tarde.');
     }
 
-    // Resto de la lógica para mostrar el formulario y cualquier otra acción necesaria
 };
 
 
@@ -375,7 +236,7 @@ if (document.querySelector('#btnActualizar')) {
 
 const eliminarProfesional = async (nombre_profesional) => {
     try {
-        const deleteUrl = `${url}`;  // Solo la ruta base, ya que el ID irá en el cuerpo de la solicitud
+        const deleteUrl = `${url}`;
 
         const response = await fetch(deleteUrl, {
             method: 'DELETE',
@@ -383,7 +244,7 @@ const eliminarProfesional = async (nombre_profesional) => {
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             },
-            body: JSON.stringify({ nombre_profesional })  // Incluye el ID en el cuerpo de la solicitud
+            body: JSON.stringify({ nombre_profesional })
         });
 
         if (!response.ok) {
@@ -405,7 +266,6 @@ const eliminarProfesional = async (nombre_profesional) => {
 
     } catch (error) {
         console.error('Error al eliminar el profesional:', error.message);
-        // Puedes manejar el error de alguna manera, por ejemplo, mostrar un mensaje al usuario.
         alert('Error al eliminar el profesional. Por favor, inténtalo de nuevo más tarde.');
     }
 
